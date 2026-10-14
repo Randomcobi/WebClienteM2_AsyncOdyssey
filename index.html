@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Wiki de mobile suits Gundam construida sobre la Gundam API." />
+    <title>Gundam Wiki · Hangar de Mobile Suits</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="#/">GUNDAM<span>WIKI</span></a>
+      <p class="tagline">Archivo de mobile suits de todas las líneas temporales</p>
+    </header>
+
+    <main class="layout">
+      <section id="controls" class="controls" aria-label="Búsqueda y filtros" hidden>
+        <label class="field">
+          <span>Buscar</span>
+          <input id="search" type="search" placeholder="Nombre, modelo o piloto (p. ej. Amuro)" autocomplete="off" />
+        </label>
+        <label class="field">
+          <span>Universo</span>
+          <select id="universe"></select>
+        </label>
+        <label class="field">
+          <span>Ordenar</span>
+          <select id="sort">
+            <option value="id">Nº de registro</option>
+            <option value="name-asc">Nombre A–Z</option>
+            <option value="name-desc">Nombre Z–A</option>
+            <option value="pilots">Más pilotos</option>
+          </select>
+        </label>
+        <label class="field field--check">
+          <input id="only-image" type="checkbox" />
+          <span>Solo con imagen</span>
+        </label>
+        <div id="stats" class="stats-wrap"></div>
+      </section>
+
+      <section id="view" aria-live="polite"></section>
+    </main>
+
+    <footer class="site-footer">
+      <span id="source"></span>
+      <button type="button" class="btn btn--ghost" id="refresh">Actualizar datos</button>
+      <span>Datos: <a href="https://gundam-api.pages.dev" target="_blank" rel="noopener noreferrer">Gundam API</a> · Gundam Wiki (Fandom)</span>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

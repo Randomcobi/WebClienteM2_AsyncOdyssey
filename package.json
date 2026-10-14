@@ -1,0 +1,18 @@
+{
+  "name": "gundam-wiki",
+  "version": "1.0.0",
+  "description": "Wiki de mobile suits Gundam que consume la Gundam API con fetch y async/await",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.3.0"
+  }
+}
