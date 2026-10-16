@@ -1,11 +1,10 @@
-// Capa de presentación: recibe datos ya preparados y genera el HTML.
-// No hace peticiones ni decide qué datos mostrar.
+// Funciones que generan el HTML
 
 const PLACEHOLDER_IMG = `data:image/svg+xml,${encodeURIComponent(
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><rect width="120" height="120" fill="#1b2433"/><text x="60" y="66" font-family="monospace" font-size="12" fill="#7d8aa5" text-anchor="middle">NO DATA</text></svg>',
 )}`;
 
-/** Escapa texto para insertarlo en HTML de forma segura. */
+// Evita meter HTML de la API en la página
 const escapeHtml = (value = '') =>
   String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 
@@ -14,7 +13,7 @@ const imageTag = (gundam, className) => `
        alt="${escapeHtml(gundam.fullName)}" loading="lazy" referrerpolicy="no-referrer"
        data-fallback="${PLACEHOLDER_IMG}" />`;
 
-// Si una imagen de la wiki falla, ponemos el placeholder (una sola vez).
+// Si falla una imagen, ponemos la de reserva
 export function attachImageFallbacks(root) {
   root.querySelectorAll('img[data-fallback]').forEach((img) => {
     img.addEventListener('error', () => {

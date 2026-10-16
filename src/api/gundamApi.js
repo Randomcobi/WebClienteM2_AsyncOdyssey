@@ -1,12 +1,10 @@
-// Capa de acceso a la Gundam API (https://gundam-api.pages.dev).
-// Solo sabe hacer peticiones y devolver datos crudos: no transforma ni pinta nada.
+// Peticiones a la Gundam API
 
 import { readCache, writeCache } from './cache.js';
 
 const BASE_URL = import.meta.env.VITE_API_BASE ?? '/api';
 const TIMEOUT_MS = 10_000;
-// La API acepta un `limit` alto: con una sola petición traemos el catálogo entero
-// y así la búsqueda y los filtros funcionan sobre todos los trajes.
+// Pedimos todos los trajes de una vez
 const ALL_LIMIT = 1000;
 
 export class ApiError extends Error {
@@ -47,11 +45,7 @@ async function fetchJson(path) {
   }
 }
 
-/**
- * Devuelve el listado completo de trajes en crudo.
- * Usa la caché de localStorage salvo que se pida `force`.
- * @returns {Promise<{ results: object[], fromCache: boolean, savedAt: number }>}
- */
+// Devuelve todos los trajes (de la caché si los hay)
 export async function getAllGundams({ force = false } = {}) {
   const cacheKey = `gundams?limit=${ALL_LIMIT}`;
 
@@ -61,7 +55,7 @@ export async function getAllGundams({ force = false } = {}) {
   }
 
   const json = await fetchJson(`/gundams?limit=${ALL_LIMIT}`);
-  // Si la respuesta tiene una forma inesperada, devolvemos lista vacía en lugar de explotar.
+  // Si la respuesta es rara, devolvemos una lista vacía
   const results = Array.isArray(json?.results) ? json.results : [];
 
   if (results.length > 0) writeCache(cacheKey, results);

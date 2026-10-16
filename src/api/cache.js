@@ -1,6 +1,4 @@
-// Caché sencilla sobre localStorage con caducidad (TTL).
-// Todas las operaciones van envueltas en try/catch: en modo privado, con el
-// almacenamiento lleno o con datos corruptos, la app sigue funcionando sin caché.
+// Caché en localStorage que caduca a las 24 h
 
 const PREFIX = 'gundam-wiki:';
 const DEFAULT_TTL_MS = 1000 * 60 * 60 * 24; // 24 h
@@ -27,7 +25,7 @@ export function writeCache(key, data, ttl = DEFAULT_TTL_MS) {
     localStorage.setItem(PREFIX + key, JSON.stringify({ savedAt: Date.now(), ttl, data }));
     return true;
   } catch {
-    // QuotaExceededError o almacenamiento deshabilitado: seguimos sin caché.
+    // Si no se puede guardar, seguimos sin caché
     return false;
   }
 }
@@ -38,6 +36,6 @@ export function clearCache() {
       .filter((key) => key.startsWith(PREFIX))
       .forEach((key) => localStorage.removeItem(key));
   } catch {
-    /* nada que limpiar */
+    // Nada que borrar
   }
 }

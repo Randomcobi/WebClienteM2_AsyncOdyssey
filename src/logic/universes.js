@@ -1,7 +1,4 @@
-// Clasificación de cada traje en su "universo" (línea temporal / franquicia)
-// a partir de palabras clave de su descripción. El orden importa: se usa el
-// primer universo cuya palabra clave aparezca (Build va antes que UC porque
-// muchos Gunpla de Build citan series de UC).
+// Universos y sus palabras clave (el orden importa)
 
 export const UNKNOWN_UNIVERSE = 'Otros / sin clasificar';
 
@@ -29,7 +26,7 @@ export const UNIVERSES = [
   },
 ];
 
-/** Devuelve el nombre del universo al que pertenece un texto. */
+// Devuelve el universo según la descripción
 export const detectUniverse = (text = '') =>
   UNIVERSES.find(({ keywords }) => keywords.some((keyword) => text.includes(keyword)))?.name ??
   UNKNOWN_UNIVERSE;

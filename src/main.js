@@ -1,5 +1,4 @@
-// Punto de entrada: orquesta API, lógica y render. Mantiene el estado de la vista
-// y conecta los eventos del usuario con las funciones puras de los otros módulos.
+// Archivo principal: une la API, la lógica y el render
 
 import './style.css';
 import { getAllGundams } from './api/gundamApi.js';
@@ -44,7 +43,7 @@ const setView = (html) => {
   attachImageFallbacks(dom.view);
 };
 
-// ---- Vistas ----
+// Vistas
 
 function renderListView() {
   const filtered = applyFilters(state.gundams, state.filters);
@@ -72,7 +71,7 @@ function render() {
   detailId ? renderDetailView(detailId) : renderListView();
 }
 
-// ---- Carga de datos ----
+// Carga de datos
 
 async function loadGundams({ force = false } = {}) {
   state.status = 'loading';
@@ -101,7 +100,7 @@ async function loadGundams({ force = false } = {}) {
   }
 }
 
-// ---- Eventos ----
+// Eventos
 
 const debounce = (fn, ms) => {
   let timer;
